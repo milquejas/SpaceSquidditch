@@ -370,6 +370,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Weapon Controls",
+            "id": "eceaf23b-8455-442c-942b-aae40392335c",
+            "actions": [
+                {
+                    "name": "ShockWave",
+                    "type": "Button",
+                    "id": "45c24ac4-a22c-4547-a062-717725e1490d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "17e5d52c-cf24-4b86-b493-2d6b92024272",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShockWave",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
