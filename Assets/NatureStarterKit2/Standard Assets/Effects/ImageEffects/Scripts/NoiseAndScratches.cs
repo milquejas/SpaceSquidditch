@@ -48,6 +48,7 @@ namespace UnityStandardAssets.ImageEffects
         private float scratchTimeLeft = 0.0f;
         private float scratchX, scratchY;
 
+        [Obsolete]
         protected void Start ()
         {
             // Disable if we don't support image effects
@@ -70,7 +71,8 @@ namespace UnityStandardAssets.ImageEffects
             }
         }
 
-        protected Material material {
+        protected Material Material
+        {
             get {
                 if ( m_MaterialRGB == null ) {
                     m_MaterialRGB = new Material( shaderRGB );
@@ -115,7 +117,7 @@ namespace UnityStandardAssets.ImageEffects
             }
             scratchTimeLeft -= Time.deltaTime;
 
-            Material mat = material;
+            Material mat = Material;
 
             mat.SetTexture("_GrainTex", grainTexture);
             mat.SetTexture("_ScratchTex", scratchTexture);
