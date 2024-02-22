@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class BikeController : MonoBehaviour
 {
     RaycastHit hit;
 
-    float moveInput, steerInput, rayLength, currentVelocityOffset;
+    float rayLength, currentVelocityOffset;
 
     [HideInInspector] public Vector3 velocity;
 
@@ -33,6 +34,23 @@ public class BikeController : MonoBehaviour
     [Range(0, 1)] public float minPitch;
     [Range(1, 5)] public float maxPitch;
 
+    // Inputs
+    private InputAction accelerate;
+    private InputAction steer;
+    private InputAction brake;
+
+    float accelerateInput;
+    float steerInput;
+    float brakeInput;
+
+    private void Awake()
+    {
+        accelerate = new InputAction("accelerate", InputActionType.Value);
+        steer = new InputAction("steer", InputActionType.Value);
+        brake = new InputAction("brake", InputActionType.Value);
+
+        brake.performed += OnBrake;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -54,11 +72,7 @@ public class BikeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moveInput = Input.GetAxis("Vertical");
-        steerInput = Input.GetAxis("Horizontal");
-
         transform.position = SphereRB.transform.position;
-
         velocity = BikeBody.transform.InverseTransformDirection(BikeBody.velocity);
         currentVelocityOffset = velocity.x / maxSpeed;
     }
@@ -69,19 +83,20 @@ public class BikeController : MonoBehaviour
 
         // Visuals
         SkidMarks();
-        FrontTyre.transform.Rotate(-Vector3.forward, Time.deltaTime * tyreRotSpeed * moveInput);
-        BackTyre.transform.Rotate(-Vector3.forward, Time.deltaTime * tyreRotSpeed * moveInput);
+        FrontTyre.transform.Rotate(-Vector3.forward, Time.deltaTime * tyreRotSpeed * accelerateInput);
+        BackTyre.transform.Rotate(-Vector3.forward, Time.deltaTime * tyreRotSpeed * accelerateInput);
 
 
         //SFX
         EngineSound();
 
     }
+
     void Movement()
     {
         if (Grounded())
         {
-            if (!Input.GetKey(KeyCode.Space))
+            if (brakeInput < 0.5f)
             {
                 Acceleration();
             }
@@ -97,12 +112,12 @@ public class BikeController : MonoBehaviour
 
     void Acceleration()
     {
-        SphereRB.velocity = Vector3.Lerp(SphereRB.velocity, moveInput * maxSpeed * -transform.right, Time.fixedDeltaTime * acceleration);
+        SphereRB.velocity = Vector3.Lerp(SphereRB.velocity, accelerateInput * maxSpeed * -transform.right, Time.fixedDeltaTime * acceleration);
     }
 
     void Rotation()
     {
-        transform.Rotate(0, steerInput * moveInput * turningCurve.Evaluate(Mathf.Abs(currentVelocityOffset))
+        transform.Rotate(0, steerInput * accelerateInput * turningCurve.Evaluate(Mathf.Abs(currentVelocityOffset))
             * steerStrenght * Time.fixedDeltaTime, 0, Space.World);
 
         //visuals
@@ -133,7 +148,7 @@ public class BikeController : MonoBehaviour
 
     void Brake()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (brakeInput > 0.5f)
         {
             SphereRB.velocity *= brakingFactor / 10;
             SphereRB.drag = driftDrag;
@@ -167,7 +182,7 @@ public class BikeController : MonoBehaviour
 
     void SkidMarks()
     {
-        if (Grounded() && Mathf.Abs(velocity.z) > minSkidVelocity || Input.GetKey(KeyCode.Space))
+        if (Grounded() && Mathf.Abs(velocity.z) > minSkidVelocity || brake.triggered)
         {
             skidMarks.emitting = true;
 
@@ -196,5 +211,34 @@ public class BikeController : MonoBehaviour
         {
             smoke.Stop();
         }
+    }
+    public void OnAccelerate(InputAction.CallbackContext context)
+    {
+        accelerateInput = context.ReadValue<float>();
+    }
+
+    public void OnSteer(InputAction.CallbackContext context)
+    {
+        steerInput = context.ReadValue<float>();
+    }
+    public void OnBrake(InputAction.CallbackContext context)
+    {
+        brakeInput = context.ReadValue<float>();
+    }
+
+    private void OnEnable()
+    {
+        
+        accelerate.Enable();
+        steer.Enable();
+        brake.Enable();
+    }
+
+    private void OnDisable()
+    {
+        
+        accelerate.Disable();
+        steer.Disable();
+        brake.Disable();
     }
 }
