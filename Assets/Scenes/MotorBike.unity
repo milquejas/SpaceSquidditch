@@ -430,7 +430,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &975421213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -450,7 +450,7 @@ MonoBehaviour:
   sensitivity: 0.2
   maxForce: 1
   jumpForce: 2
-  grounded: 0
+  grounded: 1
 --- !u!136 &975421214
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -523,9 +523,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 975421212}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 330.87, y: 3.421, z: 303.299}
-  m_LocalScale: {x: 0.47, y: 0.47, z: 0.47}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: 339.7913, y: 0.81, z: 294.95}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1116254649}
   - {fileID: 2111533031}
@@ -681,9 +681,13 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: b09cd784-e858-4780-80c1-a0e89a8f81b1
     m_ActionName: MotorBike Controls/Brake[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: cbf64c81-b218-4412-84cb-45cba1471c32
+    m_ActionName: MotorBike Controls/Interact[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
+  m_DefaultActionMap: Player Controls
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1001 &995675494
@@ -777,33 +781,37 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4915259091058839136, guid: d9c8b82f0d92a234dab0f1a04fb31c08, type: 3}
+      propertyPath: far clip plane
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 4915259091058839143, guid: d9c8b82f0d92a234dab0f1a04fb31c08, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -2.197235
       objectReference: {fileID: 0}
     - target: {fileID: 4915259091058839143, guid: d9c8b82f0d92a234dab0f1a04fb31c08, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.3100004
+      value: -0.36499977
       objectReference: {fileID: 0}
     - target: {fileID: 4915259091058839143, guid: d9c8b82f0d92a234dab0f1a04fb31c08, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.269989
+      value: -17.56131
       objectReference: {fileID: 0}
     - target: {fileID: 4915259091058839143, guid: d9c8b82f0d92a234dab0f1a04fb31c08, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7031819
       objectReference: {fileID: 0}
     - target: {fileID: 4915259091058839143, guid: d9c8b82f0d92a234dab0f1a04fb31c08, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.074399054
       objectReference: {fileID: 0}
     - target: {fileID: 4915259091058839143, guid: d9c8b82f0d92a234dab0f1a04fb31c08, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.7031819
       objectReference: {fileID: 0}
     - target: {fileID: 4915259091058839143, guid: d9c8b82f0d92a234dab0f1a04fb31c08, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.074399054
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9c8b82f0d92a234dab0f1a04fb31c08, type: 3}
@@ -838,6 +846,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1051558003
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1051558004}
+  - component: {fileID: 1051558005}
+  m_Layer: 0
+  m_Name: MountSeat
+  m_TagString: MountSeat
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1051558004
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1051558003}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.351, y: 0.264, z: 0.019}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1152198532}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1051558005
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1051558003}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1116254648
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,7 +915,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1116254648}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.827172, y: 7.003951, z: -6.5226455}
+  m_LocalPosition: {x: 6.827179, y: 7.0039515, z: -6.522644}
   m_LocalScale: {x: 2.1276596, y: 2.1276596, z: 2.1276596}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -996,6 +1049,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: b09cd784-e858-4780-80c1-a0e89a8f81b1
     m_ActionName: MotorBike Controls/Brake[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: cbf64c81-b218-4412-84cb-45cba1471c32
+    m_ActionName: MotorBike Controls/Interact[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: MotorBike Controls
@@ -1012,6 +1069,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 033863e20d45d9d49952c45fc82bd4ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1152198532 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6655750007642070183, guid: a0b909c3b973f9d41baab084cc036e8f, type: 3}
+  m_PrefabInstance: {fileID: 701221871}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1152198533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1152198521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28ec2eab5499ab6478d9219ad55a974f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 975421213}
+  bikeController: {fileID: 1152198529}
+  mountPoint: {fileID: 1546743689}
+  mountSeatPoint: {fileID: 1051558004}
+  mountDistanceThreshold: 2
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1206652940
 GameObject:
   m_ObjectHideFlags: 0
@@ -1116,6 +1198,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 944799984187000318, guid: be4eb04eecb759546b7a20e749310997, type: 3}
   m_PrefabInstance: {fileID: 1645142128}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1546743688
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1546743689}
+  - component: {fileID: 1546743690}
+  m_Layer: 0
+  m_Name: MountBike
+  m_TagString: MountBike
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1546743689
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546743688}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.384, z: -0.418}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1152198532}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1546743690
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546743688}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1548095818
 GameObject:
   m_ObjectHideFlags: 0
@@ -1585,7 +1712,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2111533028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.042594746, y: -1.051, z: -0.023375167}
+  m_LocalPosition: {x: 0.04260254, y: -1.0510001, z: -0.023376465}
   m_LocalScale: {x: 0.4893617, y: 0.21276596, z: 0.4042553}
   m_ConstrainProportionsScale: 0
   m_Children: []
