@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class BikeController : MonoBehaviour
 {
     RaycastHit hit;
+    public PlayerController playerController;
 
     float rayLength, currentVelocityOffset;
 
@@ -43,8 +44,11 @@ public class BikeController : MonoBehaviour
     float steerInput;
     float brakeInput;
 
+    private bool playerOnBike = false;
+
     private void Awake()
     {
+
         accelerate = new InputAction("accelerate", InputActionType.Value);
         steer = new InputAction("steer", InputActionType.Value);
         brake = new InputAction("brake", InputActionType.Value);
@@ -55,6 +59,11 @@ public class BikeController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (playerOnBike)
+        {
+            enabled = false;
+        }
+
         SphereRB.transform.parent = null;
         BikeBody.transform.parent = null;
 
@@ -72,6 +81,11 @@ public class BikeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!playerOnBike)
+        {
+            // Jos pelaaja ei ole moottoripyörän kyydissä, disabloi BikeController
+            enabled = false;
+        }
         transform.position = SphereRB.transform.position;
         velocity = BikeBody.transform.InverseTransformDirection(BikeBody.velocity);
         currentVelocityOffset = velocity.x / maxSpeed;
@@ -90,6 +104,31 @@ public class BikeController : MonoBehaviour
         //SFX
         EngineSound();
 
+    }
+    public bool PlayerOnBike()
+    {
+        return playerOnBike;
+    }
+    public void MountPlayer(PlayerController player)
+    {
+        // Enabloi pelaajan moottoripyörän kyytiin
+        // Disabloi pelaajan peliolio ja asettaa pelaajan moottoripyörän lapsiobjektiksi
+        //player.gameObject.SetActive(false);
+        player.transform.parent = transform;
+        playerOnBike = true;
+        enabled = true;
+
+    }
+
+    public void DismountPlayer(PlayerController player)
+    {
+        // Disabloi pelaajan moottoripyörän kyydistä
+        // Enabloi pelaajan peliolio ja irroittaa pelaajan moottoripyörästä
+        player.gameObject.SetActive(true);
+        player.transform.parent = null;
+
+        playerOnBike = false;
+        player.rb.isKinematic = false;
     }
 
     void Movement()

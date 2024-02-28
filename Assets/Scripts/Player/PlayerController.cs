@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    
     public Rigidbody rb;
     public GameObject camHolder;
     public float speed, sprintSpeed, sensitivity, maxForce, jumpForce;
@@ -40,6 +41,29 @@ public class PlayerController : MonoBehaviour
     {
         Look();
     }
+
+    public void MountBike(BikeController bike)
+    {
+        // Disabloi pelaajan liikkuminen
+        // Enabloi moottoripyörän ja disabloi pelaajan peliolio
+        rb.isKinematic = true;
+        gameObject.SetActive(false);
+        bike.MountPlayer(this);
+    }
+
+    public void DismountBike(PlayerController playerController)
+    {
+        // Enabloi pelaajan liikkuminen
+        playerController.enabled = true;
+
+        // Disabloi moottoripyörä ja enabloi pelaajan peliolio
+        rb.isKinematic = false;
+        gameObject.SetActive(true);
+        playerController.SetGrounded(true);
+        
+    }
+
+
     private void Move()
     {
         // Find target velocity
