@@ -253,7 +253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6655750007642070181, guid: a0b909c3b973f9d41baab084cc036e8f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6655750007642070182, guid: a0b909c3b973f9d41baab084cc036e8f, type: 3}
       propertyPath: tiltAngle
@@ -263,6 +263,14 @@ PrefabInstance:
       propertyPath: xTiltAngle
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 6655750007642070182, guid: a0b909c3b973f9d41baab084cc036e8f, type: 3}
+      propertyPath: bikeInteraction
+      value: 
+      objectReference: {fileID: 1152198533}
+    - target: {fileID: 6655750007642070182, guid: a0b909c3b973f9d41baab084cc036e8f, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 975421213}
     - target: {fileID: 6655750007642070182, guid: a0b909c3b973f9d41baab084cc036e8f, type: 3}
       propertyPath: bikeZTiltIncrement
       value: 81.27
@@ -523,7 +531,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 975421212}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 339.7913, y: 0.81, z: 294.95}
+  m_LocalPosition: {x: 339.7913, y: 1.18, z: 294.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1384,7 +1392,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 944799982365822275, guid: be4eb04eecb759546b7a20e749310997, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be4eb04eecb759546b7a20e749310997, type: 3}
@@ -1828,7 +1836,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3959960539604689499, guid: 2d9f31bc68c347342a47c1c5dd4c5f15, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d9f31bc68c347342a47c1c5dd4c5f15, type: 3}

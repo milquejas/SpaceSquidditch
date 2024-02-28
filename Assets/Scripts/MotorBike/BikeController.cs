@@ -112,8 +112,7 @@ public class BikeController : MonoBehaviour
     public void MountPlayer(PlayerController player)
     {
         // Enabloi pelaajan moottoripyörän kyytiin
-        // Disabloi pelaajan peliolio ja asettaa pelaajan moottoripyörän lapsiobjektiksi
-        //player.gameObject.SetActive(false);
+        // asettaa pelaajan moottoripyörän lapsiobjektiksi
         player.transform.parent = transform;
         playerOnBike = true;
         enabled = true;
@@ -124,9 +123,7 @@ public class BikeController : MonoBehaviour
     {
         // Disabloi pelaajan moottoripyörän kyydistä
         // Enabloi pelaajan peliolio ja irroittaa pelaajan moottoripyörästä
-        player.gameObject.SetActive(true);
         player.transform.parent = null;
-
         playerOnBike = false;
         player.rb.isKinematic = false;
     }

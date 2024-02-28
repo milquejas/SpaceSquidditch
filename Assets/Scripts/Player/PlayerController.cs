@@ -47,7 +47,6 @@ public class PlayerController : MonoBehaviour
         // Disabloi pelaajan liikkuminen
         // Enabloi moottoripyörän ja disabloi pelaajan peliolio
         rb.isKinematic = true;
-        gameObject.SetActive(false);
         bike.MountPlayer(this);
     }
 
@@ -58,7 +57,6 @@ public class PlayerController : MonoBehaviour
 
         // Disabloi moottoripyörä ja enabloi pelaajan peliolio
         rb.isKinematic = false;
-        gameObject.SetActive(true);
         playerController.SetGrounded(true);
         
     }
