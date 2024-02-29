@@ -400,7 +400,7 @@
             ]
         },
         {
-            "name": "Player Controls",
+            "name": "CharacterControls",
             "id": "7f99d165-a60c-4c9f-9722-a72c614b1adb",
             "actions": [
                 {

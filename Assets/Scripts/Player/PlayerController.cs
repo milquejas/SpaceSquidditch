@@ -7,35 +7,57 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    
+
     public Rigidbody rb;
     public GameObject camHolder;
     public float speed, sprintSpeed, sensitivity, maxForce, jumpForce;
-    private Vector2 move, look;
+    private Vector2 look;
+    private Vector2 move;
     private float lookRotation;
-    public bool grounded;
+    public bool isGrounded;
     private bool isSprinting;
+    Animator animator;
+
+    // Jump variables
+    public float gravityScale;
+    public float jumpSpeed;
+    public float fallingGravityScale;
+    public float currentGravityScale;
+
     public void OnMove(InputAction.CallbackContext context)
     {
         move = context.ReadValue<Vector2>();
+        animator.SetFloat("Move.X", move.x);
+        animator.SetFloat("Move.Y", move.y);
+
     }
     public void OnLook(InputAction.CallbackContext context)
     {
         look = context.ReadValue<Vector2>();
     }
-    public void OnJump(InputAction.CallbackContext context) => Jump();
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            Jump();
+    }
     public void OnSprint(InputAction.CallbackContext context)
     {
         isSprinting = context.ReadValueAsButton();
     }
     public void Start()
     {
+        currentGravityScale = gravityScale;
         Cursor.lockState = CursorLockMode.Locked;
+        animator = GetComponent<Animator>();
+    }
+    private void Update()
+    {
+
     }
     private void FixedUpdate()
     {
         Move();
-
+        
     }
     private void LateUpdate()
     {
@@ -58,12 +80,13 @@ public class PlayerController : MonoBehaviour
         // Disabloi moottoripyörä ja enabloi pelaajan peliolio
         rb.isKinematic = false;
         playerController.SetGrounded(true);
-        
+
     }
 
 
     private void Move()
     {
+
         // Find target velocity
         Vector3 currentVelocity = rb.velocity;
         Vector3 targetVelocity = new Vector3(move.x, 0, move.y);
@@ -106,21 +129,42 @@ public class PlayerController : MonoBehaviour
     //}
 
     // Tämä method käyttää fysiikkamoottoria hyppyvoiman laskemiseen
+    //void Jump()
+    //{
+    //    Vector3 jumpForces = Vector3.zero;
+
+    //    if (isGrounded)
+    //    {
+    //        jumpForces = Vector3.up * jumpForce;
+    //    }
+
+    //    rb.AddForce(jumpForces, ForceMode.VelocityChange);
+    //}
     void Jump()
     {
-        Vector3 jumpForces = Vector3.zero;
-
-        if (grounded)
-        {
-            jumpForces = Vector3.up * jumpForce;
-        }
-
-        rb.AddForce(jumpForces, ForceMode.VelocityChange);
+        rb.AddForce(Physics.gravity * (gravityScale - 1) * rb.mass);
     }
+
+
+    //public static float CalculateJumpForce(float playerWeight, float playerStrength)
+    //{
+    //    // Lasketaan hyppyvoima pelaajan painon ja vahvuuden perusteella
+    //    float jumpForce = playerWeight * playerStrength;
+    //    return jumpForce;
+    //}
+
+    //public static float CalculateJumpHeight(float jumpForce, float gravity)
+    //{
+    //    // Lasketaan hyppykorkeus käyttäen hyppyvoimaa ja painovoimaa
+    //    float jumpHeight = (jumpForce * jumpForce) / (2 * gravity);
+    //    return jumpHeight;
+    //}
+
+
 
     public void SetGrounded(bool state)
     {
-        grounded = state;
+        isGrounded = state;
     }
 
 }
