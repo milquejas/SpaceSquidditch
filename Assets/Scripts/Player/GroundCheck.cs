@@ -5,7 +5,7 @@ using UnityEngine;
 public class GroundCheck : MonoBehaviour
 {
     public PlayerController playerController;
-
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == playerController.gameObject)
