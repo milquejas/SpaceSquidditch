@@ -19,8 +19,7 @@ public class RaycastWeapon : MonoBehaviour
     public void StartFiring()
     {
         isFiring = true;
-        foreach(var particle in muzzleFlash)
-        particle.Emit(1);
+        foreach(var particle in muzzleFlash) particle.Emit(1);
 
         ray.origin = raycastOrigin.position;
         ray.direction = raycastDestination.position - raycastOrigin.position;
