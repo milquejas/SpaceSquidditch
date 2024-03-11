@@ -21,7 +21,7 @@ public class RaycastWeapon : MonoBehaviour
         isFiring = true;
         foreach(var particle in muzzleFlash) particle.Emit(1);
 
-        ray.origin = raycastOrigin.position;
+        //ray.origin = raycastOrigin.position;
         ray.direction = raycastDestination.position - raycastOrigin.position;
 
         var tracer = Instantiate(tracerEffect, ray.origin, Quaternion.identity);
