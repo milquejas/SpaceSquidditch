@@ -9,18 +9,18 @@ public class GunSystem : MonoBehaviour
 {
     // Gun stats
     public int damage;
-    public float timeBetweenShooting;
+    public float fireRate;
     public float spread;
     public float range;
     public float reloadTime;
     public float maxTimeBetweenShooting;
     public int magazineSize;
     public int bulletsPerTap;
-    public bool allowButtonHold;
     int bulletsLeft;
     int bulletsShot;
 
     // Conditions;
+    public bool allowButtonHold;
     bool isShooting;
     bool isReadyToShoot;
     bool isRealoading;
@@ -53,10 +53,14 @@ public class GunSystem : MonoBehaviour
 
     private void HandleInput()
     {
-        if (allowButtonHold) isShooting = Input.GetKey(KeyCode.Mouse0);
-        else isShooting = Input.GetKeyDown(KeyCode.Mouse0);
+        if (allowButtonHold) 
+            isShooting = Input.GetKey(KeyCode.Mouse0);
+        else 
+            isShooting = Input.GetKeyDown(KeyCode.Mouse0);
 
+        // Reload
         if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !isRealoading) Reload();
+
         // Shoot
         if (isReadyToShoot && isShooting && !isRealoading && bulletsLeft > 0)
         {
@@ -93,10 +97,10 @@ public class GunSystem : MonoBehaviour
 
         bulletsLeft--;
         bulletsShot--;
-        Invoke("ResetShot", timeBetweenShooting);
+        Invoke("ResetShot", fireRate);
 
         if (bulletsShot > 0 && bulletsLeft > 0)
-            Invoke("Shoot", timeBetweenShooting);
+            Invoke("Shoot", fireRate);
     }
 
     void ResetShot()

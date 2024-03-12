@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2d2ab3197ff56842b1e623fc602a8e2, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  gameObject: {fileID: 0}
+  Weapon: {fileID: 0}
   range: 0
   accuracy: 0
   spread: 0
   fireRate: 0
   reloadTime: 0
-  maxClipSize: 0
+  bulletsPerTap: 0
   clipSize: 0
+  maxClipSize: 0
   damage: 0

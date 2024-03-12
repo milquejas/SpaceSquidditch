@@ -1,9 +1,25 @@
+using System;
 using UnityEngine;
 
-public class WeaponActions : MonoBehaviour, IWeapon
+public class WeaponActions : MonoBehaviour, IWeaponAction
 {
+    WeaponSO weaponData;
+
+    public void Start()
+    {
+        //EquipGun(weaponData);
+    }
+    public void Aim()
+    {
+
+    }
     public void Shoot(WeaponSO weaponData)
     {
+        // Onko valmis ampumaan?
+        // Onko Lataus kesken ?
+        // Onko t‰ht‰ys ylh‰‰ll‰? 
+        // Onko ammuksia ? 
+        // 
         Debug.Log("Shooting with " + weaponData.name);
 
         // V‰henn‰ ammusm‰‰r‰‰
@@ -36,5 +52,10 @@ public class WeaponActions : MonoBehaviour, IWeapon
         Debug.Log("Swapping to " + weaponData.name);
 
         // Aseta vaihdettu ase aktiiviseksi (tarvittaessa)
+    }
+
+    public void EquipGun(WeaponSO weaponData)
+    {
+        throw new System.NotImplementedException();
     }
 }

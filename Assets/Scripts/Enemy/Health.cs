@@ -19,7 +19,7 @@ public class Health : MonoBehaviour
     void Start()
     {
         ragdoll = GetComponent<Ragdoll>();
-        skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
+        skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
         currentHealth = maxHealth;
 
         // Get all Rigidbody components attached to this GameObject and its children
