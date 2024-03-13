@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,21 +5,19 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public float maxHealth;
+    
     [HideInInspector]
-    public float dieForce; 
     public float currentHealth;
-    Ragdoll ragdoll;
+    AiAgent agent;
     SkinnedMeshRenderer skinnedMeshRenderer;
     UIHealthBar healthBar;
-
     public float blinkIntensity;
     public float blinkDuration;
     float blinkTimer;
 
-    // Start is called before the first frame update
     void Start()
     {
-        ragdoll = GetComponent<Ragdoll>();
+        agent = GetComponent<AiAgent>();
         skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
         healthBar = GetComponentInChildren<UIHealthBar>();
         currentHealth = maxHealth;
@@ -39,19 +36,18 @@ public class Health : MonoBehaviour
         healthBar.SetHealthBarPercentage(currentHealth / maxHealth);
         if (currentHealth <= 0.0f)
         {
-            Die(direction); // Updated to pass direction
+            Die(direction);
         }
-
         blinkTimer = blinkDuration;
     }
 
-    private void Die(Vector3 direction) // Updated Die method to accept Vector3 direction
+    private void Die(Vector3 direction)
     {
-        ragdoll.ActivateRagdoll();
-        direction.y = 1; 
-        //ragdoll.ApplyForce(direction * dieForce); 
-        healthBar.gameObject.SetActive(false);
+        AiDeathState deathState = agent.stateMachine.GetState(AiStateId.Death) as AiDeathState;
+        deathState.direction = direction;
+        agent.stateMachine.ChangeState(AiStateId.Death);
     }
+
 
     private void Update()
     {

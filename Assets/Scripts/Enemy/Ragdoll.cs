@@ -32,4 +32,14 @@ public class Ragdoll : MonoBehaviour
         }
         animator.enabled = false;
     }
+
+    // This method will apply force to all rigidbodies in the ragdoll.
+    public void ApplyForce(Vector3 force)
+    {
+        foreach (var rigidBody in rigidBodies)
+        {
+            // The force is added to the rigidbody at its center of mass.
+            rigidBody.AddForce(force, ForceMode.Impulse);
+        }
+    }
 }

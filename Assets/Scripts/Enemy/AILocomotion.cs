@@ -12,24 +12,26 @@ public class AILocomotion : MonoBehaviour
     Animator animator;
     float timer = 0.0f;
 
+    // Start is called before the first frame update
     void Start()
     {
+        
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
     }
 
+
+    // Update is called once per frame
     void Update()
     {
-        timer -= Time.deltaTime;
-        if (timer < 0.0f)
+        if (agent.hasPath)
         {
-            float sqDistance = (playerTransform.position - agent.destination).sqrMagnitude;
-            if (sqDistance > maxDistance * maxDistance)
-            {
-                agent.destination = playerTransform.position;
-            }
-            timer = maxTime;
+            animator.SetFloat("speed", agent.velocity.magnitude);
         }
-        animator.SetFloat("speed", agent.velocity.magnitude);
+        else
+        {
+            animator.SetFloat("speed", 0);
+        }
     }
+
 }

@@ -1,25 +1,55 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AiChasePlayerState : AiState
 {
-    public AiStateId GetId()
+    
+    private float timer;
+
+    public AiStateId GetID()
     {
         return AiStateId.ChasePlayer;
     }
 
     public void Enter(AiAgent agent)
     {
-        // T‰h‰n lis‰t‰‰n toimintoja, jotka tapahtuvat kun tilaan tullaan.
+
     }
 
+    // Update is called once per frame
     public void Update(AiAgent agent)
     {
-        // T‰h‰n lis‰t‰‰n toimintoja, jotka tapahtuvat joka p‰ivityksell‰ t‰ss‰ tilassa.
+        if (!agent.enabled)
+        {
+            return;
+        }
+
+        timer -= Time.deltaTime;
+        if (!agent.navMeshAgent.hasPath)
+        {
+            agent.navMeshAgent.destination = agent.playerTransform.position;
+        }
+
+        if (timer < 0.0f)
+        {
+            Vector3 direction = (agent.playerTransform.position - agent.navMeshAgent.destination);
+            direction.y = 0;
+            if (direction.sqrMagnitude > agent.config.maxDistance * agent.config.maxDistance)
+            {
+                if (agent.navMeshAgent.pathStatus != NavMeshPathStatus.PathPartial)
+                {
+                    agent.navMeshAgent.destination = agent.playerTransform.position;
+                }
+            }
+            timer = agent.config.maxTime;
+        }
     }
+
 
     public void Exit(AiAgent agent)
     {
-        // T‰h‰n lis‰t‰‰n toimintoja, jotka tapahtuvat kun tilasta poistutaan.
+        // Actions to perform when exiting the state
     }
 }
