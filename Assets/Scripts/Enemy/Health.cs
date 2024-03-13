@@ -7,9 +7,11 @@ public class Health : MonoBehaviour
 {
     public float maxHealth;
     [HideInInspector]
+    public float dieForce; 
     public float currentHealth;
     Ragdoll ragdoll;
     SkinnedMeshRenderer skinnedMeshRenderer;
+    UIHealthBar healthBar;
 
     public float blinkIntensity;
     public float blinkDuration;
@@ -20,15 +22,13 @@ public class Health : MonoBehaviour
     {
         ragdoll = GetComponent<Ragdoll>();
         skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        healthBar = GetComponentInChildren<UIHealthBar>();
         currentHealth = maxHealth;
 
-        // Get all Rigidbody components attached to this GameObject and its children
         var rigidBodies = GetComponentsInChildren<Rigidbody>();
         foreach (var rigidBody in rigidBodies)
         {
-            // Add a HitBox component to each Rigidbody's GameObject
             HitBox hitBox = rigidBody.gameObject.AddComponent<HitBox>();
-            // Set the health reference in the HitBox to this Health script
             hitBox.health = this;
         }
     }
@@ -36,26 +36,28 @@ public class Health : MonoBehaviour
     public void TakeDamage(float amount, Vector3 direction)
     {
         currentHealth -= amount;
+        healthBar.SetHealthBarPercentage(currentHealth / maxHealth);
         if (currentHealth <= 0.0f)
         {
-            Die();
+            Die(direction); // Updated to pass direction
         }
 
         blinkTimer = blinkDuration;
-
     }
 
-    private void Die()
+    private void Die(Vector3 direction) // Updated Die method to accept Vector3 direction
     {
         ragdoll.ActivateRagdoll();
+        direction.y = 1; 
+        //ragdoll.ApplyForce(direction * dieForce); 
+        healthBar.gameObject.SetActive(false);
     }
 
     private void Update()
     {
         blinkTimer -= Time.deltaTime;
         float lerp = Mathf.Clamp01(blinkTimer / blinkDuration);
-        float intensity = lerp * blinkIntensity;
+        float intensity = (lerp * blinkIntensity) + 1.0f;
         skinnedMeshRenderer.material.color = Color.white * intensity;
-
     }
 }
