@@ -8,7 +8,7 @@ public class Health : MonoBehaviour
     
     [HideInInspector]
     public float currentHealth;
-    AiAgent agent;
+ 
     SkinnedMeshRenderer skinnedMeshRenderer;
     UIHealthBar healthBar;
     public float blinkIntensity;
@@ -17,7 +17,7 @@ public class Health : MonoBehaviour
 
     void Start()
     {
-        agent = GetComponent<AiAgent>();
+        
         skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
         healthBar = GetComponentInChildren<UIHealthBar>();
         currentHealth = maxHealth;
@@ -27,13 +27,20 @@ public class Health : MonoBehaviour
         {
             HitBox hitBox = rigidBody.gameObject.AddComponent<HitBox>();
             hitBox.health = this;
+            if (hitBox.gameObject != gameObject)
+            {
+                hitBox.gameObject.layer = LayerMask.NameToLayer("Hitbox");
+            }
         }
+
+        OnStart();
     }
 
     public void TakeDamage(float amount, Vector3 direction)
     {
         currentHealth -= amount;
         healthBar.SetHealthBarPercentage(currentHealth / maxHealth);
+        OnDamage(direction);
         if (currentHealth <= 0.0f)
         {
             Die(direction);
@@ -43,9 +50,8 @@ public class Health : MonoBehaviour
 
     private void Die(Vector3 direction)
     {
-        AiDeathState deathState = agent.stateMachine.GetState(AiStateId.Death) as AiDeathState;
-        deathState.direction = direction;
-        agent.stateMachine.ChangeState(AiStateId.Death);
+        OnDeath(direction);
+        
     }
 
 
@@ -56,4 +62,17 @@ public class Health : MonoBehaviour
         float intensity = (lerp * blinkIntensity) + 1.0f;
         skinnedMeshRenderer.material.color = Color.white * intensity;
     }
+
+    protected virtual void OnStart()
+    {
+
+    } 
+    protected virtual void OnDeath(Vector3 direction)
+    {
+
+    } protected virtual void OnDamage(Vector3 direction)
+    {
+
+    }
+
 }

@@ -25,6 +25,8 @@ public class RaycastWeaponUpdate : MonoBehaviour
     public ParticleSystem[] muzzleFlash;
     public ParticleSystem hitEffect;
     public TrailRenderer tracerEffect;
+    public string weaponName;
+    public LayerMask layerMask;
 
     public Transform raycastOrigin;
     public Transform raycastDestination;
@@ -100,7 +102,7 @@ public class RaycastWeaponUpdate : MonoBehaviour
         ray.origin = start;
         ray.direction = end - start;
 
-        if (Physics.Raycast(ray, out hitInfo, distance))
+        if (Physics.Raycast(ray, out hitInfo, distance, layerMask))
         {
             hitEffect.transform.position = hitInfo.point;
             hitEffect.transform.forward = hitInfo.normal;
