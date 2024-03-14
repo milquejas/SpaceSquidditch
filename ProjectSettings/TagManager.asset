@@ -17,8 +17,8 @@ TagManager:
   - SphereRB
   - Derivable
   - Enemy
-  - 
-  - 
+  - Pickup
+  - Character
   - 
   - 
   - 
