@@ -4,10 +4,14 @@ using UnityEngine;
 public class WeaponActions : MonoBehaviour, IWeaponAction
 {
     WeaponSO weaponData;
-
+    [SerializeField] GameObject weaponHolder;
+    public void Awake()
+    {
+        weaponData = weaponHolder.GetComponent<WeaponSO>();
+    }
     public void Start()
     {
-        //EquipGun(weaponData);
+        EquipGun(weaponData);
     }
     public void Aim()
     {

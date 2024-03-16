@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MountBike
   - MountSeat
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -17,8 +18,8 @@ TagManager:
   - SphereRB
   - Derivable
   - Enemy
-  - Pickup
-  - Character
+  - Player
+  - Bullet
   - 
   - 
   - 

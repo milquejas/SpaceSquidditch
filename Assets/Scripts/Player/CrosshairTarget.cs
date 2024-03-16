@@ -12,13 +12,33 @@ public class CrosshairTarget : MonoBehaviour
     {
         mainCamera = Camera.main;
     }
-
-    // Update is called once per frame
+    // T‰ss‰ p‰ivitys t‰h‰n luokkaan. Oli lis‰tty youtube videon kommenteissa.
+    // P‰ivitys est‰‰ sen ett‰ pelaaja ei ammu sivuille tai taakse p‰in
     void Update()
     {
         ray.origin = mainCamera.transform.position;
         ray.direction = mainCamera.transform.forward;
-        Physics.Raycast(ray, out hitInfo);
-        transform.position = hitInfo.point;
+        if (Physics.Raycast(ray, out hitInfo))
+        {
+
+            transform.position = hitInfo.point;
+
+        }
+        else
+        {
+
+            transform.position = ray.origin + ray.direction * 1000.0f;
+
+        }
     }
+    // Update is called once per frame
+    //void Update()
+    //{
+    //    ray.origin = mainCamera.transform.position;
+    //    ray.direction = mainCamera.transform.forward;
+    //    Physics.Raycast(ray, out hitInfo);
+    //    transform.position = hitInfo.point;
+    //}
+
+
 }
