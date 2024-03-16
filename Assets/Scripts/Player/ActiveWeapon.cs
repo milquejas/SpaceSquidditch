@@ -14,7 +14,6 @@ public class ActiveWeapon : MonoBehaviour
     public Transform crossHairTarget;
     public Animator rigController;
     public Transform[] weaponSlots;
-
     RaycastWeaponUpdate[] equipped_weapons = new RaycastWeaponUpdate[2];
     int activeWeaponIndex;
 
@@ -43,7 +42,6 @@ public class ActiveWeapon : MonoBehaviour
         var weapon = GetWeapon(activeWeaponIndex);
         if (weapon && !isHolstered)
         {
-            weapon.UpdateWeapon(Time.deltaTime);
             if (Input.GetKeyDown(KeyCode.X))
             {
                 ToggleActiveWeapon();
@@ -58,6 +56,7 @@ public class ActiveWeapon : MonoBehaviour
                 SetActiveWeapon(WeaponSlot.Secondary);
             }
         }
+
     }
     public void Equip(RaycastWeaponUpdate newWeapon)
     {
