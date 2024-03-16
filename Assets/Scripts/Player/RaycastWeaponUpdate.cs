@@ -30,8 +30,6 @@ public class RaycastWeaponUpdate : MonoBehaviour
     public ParticleSystem[] muzzleFlash;
     public ParticleSystem hitEffect;
     public TrailRenderer tracerEffect;
-    public string weaponName;
-    public LayerMask layerMask;
 
     //Transform
     public Transform raycastOrigin;
@@ -69,19 +67,7 @@ public class RaycastWeaponUpdate : MonoBehaviour
         //bullet.bulletTracer.material.SetColor("_EmissionColor", rgb);
         return bullet;
     }
-    public void StartFiring()
-    {
-        
-        isFiring = true;
-        accumulatedTime = 0.0f;
-        FireBullet();
 
-    }
-    public void StopFiring()
-    {
-        isFiring = false;
-        accumulatedTime = 0.0f;
-    }
     public void UpdateWeaponAction(float deltaTime)
     {
         if (Input.GetMouseButtonDown(0))
@@ -94,7 +80,6 @@ public class RaycastWeaponUpdate : MonoBehaviour
         if (isFiring)
         {
             Debug.Log("Update");
-
             UpdateFiring(deltaTime);
         }
         UpdateBullets(deltaTime);
@@ -103,7 +88,6 @@ public class RaycastWeaponUpdate : MonoBehaviour
             Debug.Log("Stop");
             isFiring = false;
             accumulatedTime = 0.0f;
-            //StopFiring();
         }
     }
     public void UpdateFiring(float deltaTime)
@@ -164,7 +148,7 @@ public class RaycastWeaponUpdate : MonoBehaviour
         ray.origin = start;
         ray.direction = direction;
 
-        if (Physics.Raycast(ray, out hitInfo, distance, layerMask))
+        if (Physics.Raycast(ray, out hitInfo, distance))
         {
 
             hitEffect.transform.position = hitInfo.point;
