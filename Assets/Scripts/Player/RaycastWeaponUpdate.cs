@@ -18,6 +18,7 @@ public class RaycastWeaponUpdate : MonoBehaviour
     public bool isFiring = false;
     public string weaponName;
     public int fireRate = 25;
+    public float damage = 10.0f;
 
     // BulletSpecs
     List<Bullet> bullets = new List<Bullet>();
@@ -72,10 +73,7 @@ public class RaycastWeaponUpdate : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            accumulatedTime = 0.0f;
-            Debug.Log("Start");
-            isFiring = true;
-            FireBullet();
+            StartFiring();
         }
         if (isFiring)
         {
@@ -85,11 +83,25 @@ public class RaycastWeaponUpdate : MonoBehaviour
         UpdateBullets(deltaTime);
         if (Input.GetMouseButtonUp(0))
         {
-            Debug.Log("Stop");
-            isFiring = false;
-            accumulatedTime = 0.0f;
+            StopFiring();
         }
     }
+
+    public void StopFiring()
+    {
+        Debug.Log("Stop");
+        isFiring = false;
+        accumulatedTime = 0.0f;
+    }
+
+    public void StartFiring()
+    {
+        accumulatedTime = 0.0f;
+        Debug.Log("Start");
+        isFiring = true;
+        FireBullet();
+    }
+
     public void UpdateFiring(float deltaTime)
     {
         accumulatedTime += deltaTime;
@@ -178,6 +190,11 @@ public class RaycastWeaponUpdate : MonoBehaviour
         if (rb)
         {
             rb.AddForceAtPosition(ray.direction * 20, hitInfo.point, ForceMode.Impulse);
+        }
+        var hitBox = hitInfo.collider ? hitInfo.collider.GetComponent<HitBox>() : null;
+        if (hitBox)
+        {
+            hitBox.OnRaycastHit(this, ray.direction);
         }
 
         if (bullet.bulletTracer != null)

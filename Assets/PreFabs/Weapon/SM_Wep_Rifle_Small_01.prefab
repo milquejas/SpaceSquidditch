@@ -19286,13 +19286,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponSlot: 0
-  weaponName: Rifle
-  maxBounce: 16
+  isFiring: 0
+  weaponName: rifle
+  fireRate: 10
+  damage: 10
   bulletSpeed: 1000
   bulletDrop: 4.32
   maxLifeTime: 3
-  isFiring: 0
-  fireRate: 10
+  maxBounce: 16
   muzzleFlash:
   - {fileID: 5362734215410996991}
   - {fileID: 5363017008102331993}

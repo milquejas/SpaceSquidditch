@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AiWeapons : MonoBehaviour
 {
-    RaycastWeapon currentWeapon;
+    RaycastWeaponUpdate currentWeapon;
     Animator animator;
     MeshSockets sockets;
     WeaponIk weaponIk;
@@ -40,7 +40,7 @@ public class AiWeapons : MonoBehaviour
             currentWeapon.StopFiring();
         }
     }
-    public void Equip(RaycastWeapon weapon)
+    public void Equip(RaycastWeaponUpdate weapon)
     {
         currentWeapon = weapon;
         sockets.Attach(weapon.transform, MeshSockets.SocketId.Spine);

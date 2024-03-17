@@ -6,8 +6,8 @@ public class HitBox : MonoBehaviour
 {
     //T‰‰ pit‰ˆ‰ aktovoida kun Mike on saanut Ampumis scriptin tehty‰
     public Health health;
-    //public void OnRaycastHit(RaycastWeapon weapon, Vector3 direction)
-    //{
-    //    health.TakeDamage(weapon.damage, direction);
-    //}
+    public void OnRaycastHit(RaycastWeaponUpdate weapon, Vector3 direction)
+    {
+        health.TakeDamage(weapon.damage, direction);
+    }
 }

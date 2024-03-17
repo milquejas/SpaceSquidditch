@@ -5,10 +5,11 @@ using UnityEngine.Animations.Rigging;
 
 public class CharacterAiming : MonoBehaviour
 {
+    public float aimDuration = 0.3f;
     public float turnSpeed = 15f;
+
     Camera mainCamera;
     RaycastWeaponUpdate weapon;
-    public float aimDuration = 0.3f;
     // Start is called before the first frame update
     void Start()
     {
