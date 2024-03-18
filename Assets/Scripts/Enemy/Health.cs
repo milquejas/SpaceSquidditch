@@ -48,6 +48,11 @@ public class Health : MonoBehaviour
         blinkTimer = blinkDuration;
     }
 
+    public bool IsDead()
+    {
+        return currentHealth <= 0;
+    }
+
     private void Die(Vector3 direction)
     {
         OnDeath(direction);

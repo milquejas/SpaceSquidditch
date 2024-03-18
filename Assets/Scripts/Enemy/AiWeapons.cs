@@ -63,6 +63,26 @@ public class AiWeapons : MonoBehaviour
         weaponActive = true;
     }
 
+    public void DeactivateWeapon()
+    {
+        SetTarget(null);
+        SetFiring(false);
+        StartCoroutine(HolsterWeapon());
+    }
+
+    IEnumerator HolsterWeapon()
+    {
+        weaponActive = false;
+        animator.SetBool("Equip", false);
+        yield return new WaitForSeconds(0.5f);
+        while (animator.GetCurrentAnimatorStateInfo(1).normalizedTime < 1.0f)
+        {
+            yield return null;
+        }
+        weaponIk.SetAimTransform(currentWeapon.raycastOrigin);
+        
+    }
+
     public void DropWeapon()
     {
         if (currentWeapon)
