@@ -13,12 +13,17 @@ public class RaycastWeaponUpdate : MonoBehaviour
         public int bounce;
     }
 
-    // WeaponSpecs
     public ActiveWeapon.WeaponSlot weaponSlot;
+    WeaponRecoil recoil;
+
+    // WeaponSpecs
+    //public MeshSocket.SocketId holsterSocket;
     public bool isFiring = false;
     public string weaponName;
     public int fireRate = 25;
     public float damage = 10.0f;
+    public GameObject magazine;
+    //public WeaponRecoil recoil;
 
     // BulletSpecs
     List<Bullet> bullets = new List<Bullet>();
@@ -26,6 +31,8 @@ public class RaycastWeaponUpdate : MonoBehaviour
     public float bulletDrop = 300.0f;
     public float maxLifeTime = 3.0f;
     public int maxBounce = 1;
+    public int ammoCount;
+    public int clipSize;
     
     // Effects
     public ParticleSystem[] muzzleFlash;
@@ -35,14 +42,19 @@ public class RaycastWeaponUpdate : MonoBehaviour
     //Transform
     public Transform raycastOrigin;
     public Transform raycastDestination;
+    Vector3 target;
+    public LayerMask layerMask;
 
     Ray ray;
     RaycastHit hitInfo;
     float accumulatedTime = 0.0f;
-
+    private void Awake()
+    {
+        //recoil = GetComponent<WeaponRecoil>();
+    }
     private void LateUpdate()      
     {
-        UpdateWeaponAction(Time.deltaTime);
+        UpdateWeaponAction(Time.deltaTime, target);
     }
     Vector3 GetPosition(Bullet bullet)
     {
@@ -69,17 +81,22 @@ public class RaycastWeaponUpdate : MonoBehaviour
         return bullet;
     }
 
-    public void UpdateWeaponAction(float deltaTime)
+    public void UpdateWeaponAction(float deltaTime, Vector3 target)
     {
+        Vector3 targetPosition = target;// määritä kohdepositio
         if (Input.GetMouseButtonDown(0))
         {
-            StartFiring();
+            StartFiring(target);
         }
         if (isFiring)
         {
             Debug.Log("Update");
-            UpdateFiring(deltaTime);
+            UpdateFiring(deltaTime,target);
         }
+
+        // Need to keep track of cooldown even when not firing to prevent click spam.
+        accumulatedTime += deltaTime;
+
         UpdateBullets(deltaTime);
         if (Input.GetMouseButtonUp(0))
         {
@@ -94,26 +111,31 @@ public class RaycastWeaponUpdate : MonoBehaviour
         accumulatedTime = 0.0f;
     }
 
-    public void StartFiring()
+    public void StartFiring(Vector3 target)
     {
         accumulatedTime = 0.0f;
         Debug.Log("Start");
         isFiring = true;
-        FireBullet();
+        recoil.Reset();
+        //FireBullet(target);
     }
 
-    public void UpdateFiring(float deltaTime)
-    {
-        accumulatedTime += deltaTime;
+    public void UpdateFiring(float deltaTime, Vector3 target)
+    {        
         float fireInterval = 1.0f / fireRate;
-        while (accumulatedTime >= fireInterval)
+        while (accumulatedTime >= 0.0f)
         {
-            FireBullet();
+            FireBullet(target);
             accumulatedTime -= fireInterval;
         }
     }
-    private void FireBullet()
+    private void FireBullet(Vector3 target)
     {
+        if (ammoCount <= 0)
+        {
+            return;
+        }
+
         foreach (var particle in muzzleFlash)
         {
             particle.Emit(1);
@@ -124,6 +146,7 @@ public class RaycastWeaponUpdate : MonoBehaviour
 
         bullets.Add(bullet);
 
+        //recoil.GenerateRecoil(weaponName);
     }
     public void UpdateBullets(float deltaTime)
     {

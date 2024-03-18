@@ -89,12 +89,15 @@ public class ActiveWeapon : MonoBehaviour
     }
     public void Equip(RaycastWeaponUpdate newWeapon)
     {
+        //int weaponSlotIndex = (int)newWeapon.weaponSlot;
+        //var weapon = GetWeapon(weaponSlotIndex);
         if (weapon)
         {
             Destroy(weapon.gameObject);
         }
         weapon = newWeapon;
         weapon.raycastDestination = crossHairTarget;
+        //weapon.recoil.playerCamera = playerCamera;
         weapon.transform.parent = weaponParent;
         weapon.transform.localPosition = Vector3.zero;
         weapon.transform.localRotation = Quaternion.identity;
