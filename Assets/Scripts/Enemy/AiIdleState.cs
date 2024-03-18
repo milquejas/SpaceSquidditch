@@ -16,10 +16,10 @@ public class AiIdleState : AiState
 
     public void Update(AiAgent agent)
     {
-        if(agent.playerTransform.GetComponent<Health>().IsDead())
-        {
-            return;
-        }
+        //if(agent.playerTransform.GetComponent<Health>().IsDead())
+        //{
+        //    return;
+        //}
         Vector3 playerDirection = agent.playerTransform.position - agent.transform.position;
         if (playerDirection.magnitude > agent.config.maxSightDistance)
         {
