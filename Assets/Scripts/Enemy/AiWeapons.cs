@@ -25,7 +25,7 @@ public class AiWeapons : MonoBehaviour
         {
             Vector3 target = currentTarget.position + weaponIk.targetOffset;
             target += Random.insideUnitSphere * inaccuracy;
-            //currentWeapon.UpdateWeapon(Time.deltaTime, target);
+            //currentWeapon.UpdateWeaponAction(Time.deltaTime, target);
         }
     }
 

@@ -6,8 +6,8 @@ using System.Collections.Generic;
 public class AILocomotion : MonoBehaviour
 {
     public Transform playerTransform;
-    public float maxTime = 1.0f;
-    public float maxDistance = 1.0f;
+    public float maxTime;
+    public float maxDistance;
     NavMeshAgent agent;
     Animator animator;
     float timer = 0.0f;
