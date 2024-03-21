@@ -9692,10 +9692,13 @@ MonoBehaviour:
   weaponName: pistol
   fireRate: 10
   damage: 10
+  magazine: {fileID: 0}
   bulletSpeed: 1000
   bulletDrop: 4.32
   maxLifeTime: 3
   maxBounce: 16
+  ammoCount: 1
+  clipSize: 10
   muzzleFlash:
   - {fileID: 1898011865725503100}
   - {fileID: 6838502509720956260}
@@ -9703,6 +9706,9 @@ MonoBehaviour:
   tracerEffect: {fileID: 6355142199131826468, guid: fead970f41e323545bf6485a360503b2, type: 3}
   raycastOrigin: {fileID: 5258925074471957101}
   raycastDestination: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &2688533986587491690
 GameObject:
   m_ObjectHideFlags: 0

@@ -19288,12 +19288,15 @@ MonoBehaviour:
   weaponSlot: 0
   isFiring: 0
   weaponName: rifle
-  fireRate: 10
+  fireRate: 2
   damage: 10
-  bulletSpeed: 1000
-  bulletDrop: 4.32
+  magazine: {fileID: 0}
+  bulletSpeed: 64.54
+  bulletDrop: 228.3
   maxLifeTime: 3
   maxBounce: 16
+  ammoCount: 1
+  clipSize: 0
   muzzleFlash:
   - {fileID: 5362734215410996991}
   - {fileID: 5363017008102331993}
@@ -19301,6 +19304,9 @@ MonoBehaviour:
   tracerEffect: {fileID: 6355142199131826468, guid: fead970f41e323545bf6485a360503b2, type: 3}
   raycastOrigin: {fileID: 5236568497588047506}
   raycastDestination: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &5236057751130597995
 GameObject:
   m_ObjectHideFlags: 0

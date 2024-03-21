@@ -74,10 +74,10 @@ public class RaycastWeaponUpdate : MonoBehaviour
         bullet.bulletTracer = Instantiate(tracerEffect, position, Quaternion.identity);
         bullet.bulletTracer.AddPosition(position);
         bullet.bounce = maxBounce;
-        //Color color = Random.ColorHSV(0.46f, 0.61f);
-        //float intensity = 20.0f;
-        //Color rgb = new Color(color.r * intensity, color.g * intensity, color.b * intensity, color.a * intensity);
-        //bullet.bulletTracer.material.SetColor("_EmissionColor", rgb);
+        Color color = Random.ColorHSV(0.46f, 0.61f);
+        float intensity = 20.0f;
+        Color rgb = new Color(color.r * intensity, color.g * intensity, color.b * intensity, color.a * intensity);
+        bullet.bulletTracer.material.SetColor("_EmissionColor", rgb);
         return bullet;
     }
 
@@ -114,10 +114,11 @@ public class RaycastWeaponUpdate : MonoBehaviour
     public void StartFiring(Vector3 target)
     {
         accumulatedTime = 0.0f;
-        Debug.Log("Start");
+        
         isFiring = true;
-        recoil.Reset();
-        //FireBullet(target);
+        //recoil.Reset();
+        FireBullet(target);
+        Debug.Log("Start");
     }
 
     public void UpdateFiring(float deltaTime, Vector3 target)
@@ -145,7 +146,7 @@ public class RaycastWeaponUpdate : MonoBehaviour
         var bullet = CreateBullet(raycastOrigin.position, velocity);
 
         bullets.Add(bullet);
-
+        Debug.Log("bullet added");
         //recoil.GenerateRecoil(weaponName);
     }
     public void UpdateBullets(float deltaTime)
