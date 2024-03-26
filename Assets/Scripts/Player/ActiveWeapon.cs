@@ -13,7 +13,7 @@ public class ActiveWeapon : MonoBehaviour
     
     public Transform crossHairTarget;
     public Animator rigController;
-    //public Transform[] weaponSlots;
+    public Transform[] weaponSlots;
 
     public Transform weaponParent;
     RaycastWeaponUpdate weapon;
@@ -38,60 +38,62 @@ public class ActiveWeapon : MonoBehaviour
             Equip(existingWeapon);
         }
     }
+
+
+    // Update is called once per frame
+    void Update()
+    {
+
+        if (weapon)
+        {
+            weapon.UpdateWeaponAction(Time.deltaTime);
+            {
+                if (Input.GetKeyDown(KeyCode.X))
+                {
+                    bool isHolstered = rigController.GetBool("holster_weapon");
+                    rigController.SetBool("holster_weapon", !isHolstered);
+                }
+            }
+        }
+
+
+        //var weapon = GetWeapon(activeWeaponIndex);
+        //if (weapon && !isHolstered)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.X))
+        //    {
+        //        ToggleActiveWeapon();
+        //        Debug.Log("holster");
+        //    }
+        //}
+
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
+        //{
+        //    SetActiveWeapon(WeaponSlot.Primary);
+        //    if (Input.GetKeyDown(KeyCode.Alpha2))
+        //    {
+        //        SetActiveWeapon(WeaponSlot.Secondary);
+        //    }
+        //}
+
+    }
     RaycastWeaponUpdate GetWeapon(int index)
     {
         if (index < 0 || index >= equipped_weapons.Length)
         { return null; }
         return equipped_weapons[index];
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        var weapon = GetWeapon(activeWeaponIndex);
-        if (weapon && !isHolstered)
-        {
-            if (Input.GetKeyDown(KeyCode.X))
-            {
-                ToggleActiveWeapon();
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            SetActiveWeapon(WeaponSlot.Primary);
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                SetActiveWeapon(WeaponSlot.Secondary);
-            }
-        }
-
-    }
-    //public void Equip(RaycastWeaponUpdate newWeapon)
-    //{
-    //    int weaponSlotIndex = (int)newWeapon.weaponSlot;
-    //    var weapon = GetWeapon(weaponSlotIndex);
-    //    if (weapon)
-    //    {
-    //        Destroy(weapon.gameObject);
-    //    }
-    //    weapon = newWeapon;
-    //    weapon.raycastDestination = crossHairTarget;
-    //    weapon.transform.SetParent(weaponSlots[weaponSlotIndex], false);
-    //    equipped_weapons[weaponSlotIndex] = weapon;
-
-    //    SetActiveWeapon(newWeapon.weaponSlot);
-    //}
     public void Equip(RaycastWeaponUpdate newWeapon)
     {
-        //int weaponSlotIndex = (int)newWeapon.weaponSlot;
-        //var weapon = GetWeapon(weaponSlotIndex);
+        int weaponSlotIndex = (int)newWeapon.weaponSlot;
+        var weapon = GetWeapon(weaponSlotIndex);
         if (weapon)
         {
             Destroy(weapon.gameObject);
         }
         weapon = newWeapon;
         weapon.raycastDestination = crossHairTarget;
+        weapon.transform.parent = weaponSlots[weaponSlotIndex];
         //weapon.recoil.playerCamera = playerCamera;
         weapon.transform.parent = weaponParent;
         weapon.transform.localPosition = Vector3.zero;

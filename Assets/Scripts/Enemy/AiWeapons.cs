@@ -34,7 +34,7 @@ public class AiWeapons : MonoBehaviour
         if (enabled)
         {
             Vector3 target = currentTarget.position;
-            currentWeapon.StartFiring(target);
+            currentWeapon.StartFiring();
         }
         else
         {

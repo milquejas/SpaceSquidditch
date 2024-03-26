@@ -54,7 +54,7 @@ public class RaycastWeaponUpdate : MonoBehaviour
     }
     private void LateUpdate()      
     {
-        UpdateWeaponAction(Time.deltaTime, target);
+        UpdateWeaponAction(Time.deltaTime);
     }
     Vector3 GetPosition(Bullet bullet)
     {
@@ -81,17 +81,16 @@ public class RaycastWeaponUpdate : MonoBehaviour
         return bullet;
     }
 
-    public void UpdateWeaponAction(float deltaTime, Vector3 target)
+    public void UpdateWeaponAction(float deltaTime)
     {
-        Vector3 targetPosition = target;// määritä kohdepositio
         if (Input.GetMouseButtonDown(0))
         {
-            StartFiring(target);
+            StartFiring();
         }
         if (isFiring)
         {
             Debug.Log("Update");
-            UpdateFiring(deltaTime,target);
+            UpdateFiring(deltaTime);
         }
 
         // Need to keep track of cooldown even when not firing to prevent click spam.
@@ -111,27 +110,28 @@ public class RaycastWeaponUpdate : MonoBehaviour
         accumulatedTime = 0.0f;
     }
 
-    public void StartFiring(Vector3 target)
+    public void StartFiring()
     {
         accumulatedTime = 0.0f;
         
         isFiring = true;
         //recoil.Reset();
-        FireBullet(target);
+        FireBullet();
         Debug.Log("Start");
     }
 
-    public void UpdateFiring(float deltaTime, Vector3 target)
-    {        
+    public void UpdateFiring(float deltaTime)
+    {    
         float fireInterval = 1.0f / fireRate;
         while (accumulatedTime >= 0.0f)
         {
-            FireBullet(target);
+            FireBullet();
             accumulatedTime -= fireInterval;
         }
     }
-    private void FireBullet(Vector3 target)
+    private void FireBullet()
     {
+        
         if (ammoCount <= 0)
         {
             return;
@@ -169,38 +169,44 @@ public class RaycastWeaponUpdate : MonoBehaviour
     {
         bullets.RemoveAll(bullet => bullet.time >= maxLifeTime);
     }
-    
+
 
     void RaycastSegment(Vector3 start, Vector3 end, Bullet bullet)
     {
+        // Tarkistetaan, että luodin jälki ja luoti itsessään eivät ole null-arvoisia
         if (bullet.bulletTracer == null || bullet.bulletTracer == null)
         {
             Debug.Log("Bullet on null");
             return;
         }
 
+        // Lasketaan luodin suunta ja etäisyys aloitus- ja loppupisteiden välillä
         Vector3 direction = end - start;
         float distance = direction.magnitude;
         ray.origin = start;
         ray.direction = direction;
 
+        // Suoritetaan raycast ja tallennetaan osutun kohteen tiedot hitInfo-muuttujaan
         if (Physics.Raycast(ray, out hitInfo, distance))
         {
-
+            // Jos luoti osuu johonkin, asetetaan iskuefekti ja siirretään luodin jälki osumakohdan paikkaan
             hitEffect.transform.position = hitInfo.point;
             hitEffect.transform.forward = hitInfo.normal;
             hitEffect.Emit(1);
 
-
+            // Päivitetään luodin jäljen paikka ja asetetaan luodin elinaika maksimiin
             bullet.bulletTracer.transform.position = hitInfo.point;
             bullet.time = maxLifeTime;
-            //end = hitInfo.point;
+            // Päivitetään loppupiste osumakohdan mukaan, jotta luoti voi kimpoilla osumisen jälkeen
+            end = hitInfo.point;
         }
         else
         {
+            // Jos luoti ei osu mihinkään, siirretään luodin jälki loppukohtaan
             bullet.bulletTracer.transform.position = end;
         }
-        //Bullet ricochet
+
+        // Käsitellään luodin kimpoaminen
         if (bullet.bounce > 0)
         {
             bullet.time = 0;
@@ -209,18 +215,21 @@ public class RaycastWeaponUpdate : MonoBehaviour
             bullet.bounce--;
         }
 
-        // Collision impulse
+        // Käsitellään törmäyksen aiheuttama impulssi
         var rb = hitInfo.collider ? hitInfo.collider.GetComponent<Rigidbody>() : null;
         if (rb)
         {
             rb.AddForceAtPosition(ray.direction * 20, hitInfo.point, ForceMode.Impulse);
         }
+
+        // Käsitellään törmäykseen liittyvä toiminnallisuus
         var hitBox = hitInfo.collider ? hitInfo.collider.GetComponent<HitBox>() : null;
         if (hitBox)
         {
             hitBox.OnRaycastHit(this, ray.direction);
         }
 
+        // Päivitetään luodin jäljen paikka sen mukaan, osuiko luoti mihinkään
         if (bullet.bulletTracer != null)
         {
             if (hitInfo.collider != null)
@@ -232,8 +241,8 @@ public class RaycastWeaponUpdate : MonoBehaviour
                 bullet.bulletTracer.transform.position = end;
             }
         }
-
     }
+
 
 
 

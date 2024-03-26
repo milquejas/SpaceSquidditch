@@ -9571,6 +9571,7 @@ GameObject:
   - component: {fileID: 1589758734339113938}
   - component: {fileID: 1587967401508879312}
   - component: {fileID: 6965808863777408302}
+  - component: {fileID: -4736120852213473284}
   m_Layer: 0
   m_Name: SM_Wep_MusketPistol_01
   m_TagString: Untagged
@@ -9682,12 +9683,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1651753714099489638}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c795b60218b58cd4ea59cdfd2cd7cac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponSlot: 0
+  weaponSlot: 1
   isFiring: 0
   weaponName: pistol
   fireRate: 10
@@ -9709,6 +9710,25 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 0
+--- !u!114 &-4736120852213473284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651753714099489638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cd0030e7251f4f43a8c2d2d7f101282, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  range: 0
+  fireRate: 0
+  fireDelay: 0
+  barrelTip: {fileID: 0}
+  muzzleEffect: {fileID: 0}
+  impactEffect: {fileID: 0}
 --- !u!1 &2688533986587491690
 GameObject:
   m_ObjectHideFlags: 0
