@@ -1,20 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DefaultGunStats", menuName = "SO/Create new weapon")]
+[CreateAssetMenu(fileName = "NewWeapon", menuName = "SOWeapons/Create new weapon")]
 public class WeaponSO : ScriptableObject
 {
-    public GameObject Weapon;
-
-    public float range;    
-    public float accuracy;
+    public GameObject bullet;
+    public float impactForce;
+    public float bulletSpeed;
+    public float range;
     public float spread;
-    public float fireRate;
-    public float reloadTime;
 
-    public int bulletsPerTap;
-    public int clipSize;
+    public float damage;
+    public float fireRate;
+
+    public int currentClip;
     public int maxClipSize;
-    public int damage;
+    public int currentAmmo;
+    public int maxAmmoSize;
 }
