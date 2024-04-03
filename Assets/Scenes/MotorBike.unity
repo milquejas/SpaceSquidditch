@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5261,7 +5261,7 @@ PrefabInstance:
     - target: {fileID: 85004019, guid: f11fc98cf1e8d5547a9b2ec85cc9c664, type: 3}
       propertyPath: targetTransform
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1144991451}
     - target: {fileID: 1045401375514670, guid: f11fc98cf1e8d5547a9b2ec85cc9c664, type: 3}
       propertyPath: m_Name
       value: AiAgent
@@ -5502,7 +5502,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 912179705}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -12.88}
+  m_LocalPosition: {x: 0, y: -0, z: -12.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16273,6 +16273,7 @@ GameObject:
   - component: {fileID: 8897972357678777438}
   - component: {fileID: 5536095068064009211}
   - component: {fileID: 7723917916054208305}
+  - component: {fileID: 8897972357678777439}
   m_Layer: 0
   m_Name: SM_Wep_Rifle_Small_01 (1)
   m_TagString: Untagged
@@ -16445,6 +16446,19 @@ Transform:
   m_Father: {fileID: 1694082903}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8897972357678777439
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8083998834146942692}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.100122795, y: 0.29359818, z: 0.8498404}
+  m_Center: {x: 0, y: 0.045078814, z: 0.07481675}
 --- !u!1 &8944175356607502016
 GameObject:
   m_ObjectHideFlags: 0
