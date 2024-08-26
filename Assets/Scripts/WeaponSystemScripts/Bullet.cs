@@ -23,6 +23,6 @@ public class Bullet : MonoBehaviour
         }
 
         // Tuhoa ammus törmäyksen jälkeen
-        Destroy(gameObject);
+        Destroy(gameObject, 5f);
     }
 }
